@@ -27,7 +27,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import Foundation
 
-public class Token : CustomStringConvertible{
+public class Token: CustomStringConvertible {
     public let name:String
     public var characters:String = ""
     public var originalStringIndex:Int?

@@ -1,0 +1,29 @@
+@letters = *"-_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+@integer = *"0123456789"
+@comment = ["//"]
+begin{
+    @comment.!*"\n"->comment
+    ["class","deinit","enum","extension","func","import","init","let","protocol",
+    "static","struct","subscript","typealias","var","break","case","continue",
+    "default","do","else","fallthrough","if","in","for","return","switch","where",
+    "while","as!", "as?", "as","dynamicType","is","new","super","self","__COLUMN__","__FILE__",
+    "__FUNCTION__","__LINE__","precedence","associativity","didSet","willSet",
+    "infix","inout","mutating","nonmutating","none","operator","left","right",
+    "override","postfix","prefix","unowned","unowned(safe)","unowned(unsafe)",
+    "set setter","get", "public", "private", "internal", "->", "@IBAction", "@IBOutlet", "true", "false", "guard"].{
+        @letters->variable
+        ^->keyword
+    }
+    ["Bool","Int","float"].{
+        @letters->variable
+        ^->type
+    }
+    <'"',{!"\""->string}>->string
+    @letters->variable
+    @integer.{
+        ".".@integer->float
+        ^->integer
+    }
+
+    !"\x04"
+}

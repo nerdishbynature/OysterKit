@@ -1,36 +1,9 @@
-/*
-Copyright (c) 2014, RED When Excited
-All rights reserved.
-
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
-
-* Redistributions of source code must retain the above copyright notice, this
-list of conditions and the following disclaimer.
-
-* Redistributions in binary form must reproduce the above copyright notice,
-this list of conditions and the following disclaimer in the documentation
-and/or other materials provided with the distribution.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
-
+import UIKit
 import OysterKit
-import Cocoa
 
 let __TokenKey = "OKToken"
 
-@objc class TokenHighlighter : NSObject, NSTextStorageDelegate, NSLayoutManagerDelegate{
-    var textDidChange: Void -> Void = {}
+class SwiftHighlighter: NSObject, NSTextStorageDelegate, NSLayoutManagerDelegate {
     var backgroundQueue = NSOperationQueue()
     var tokenizationOperation = NSOperation()
     var editedRange: NSRange?
@@ -46,7 +19,15 @@ let __TokenKey = "OKToken"
         }
     }
 
-    var tokenColorMap: [String: NSColor] = [:]
+    let tokenColorMap = [
+        "comment" : UIColor.commentColor(),
+        "keyword" : UIColor.purpleColor(),
+        "type" : UIColor.purpleColor(),
+        "string" : UIColor.redColor(),
+        "variable" : UIColor.variableColor(),
+        "integer": UIColor.purpleColor(),
+        "float": UIColor.purpleColor(),
+    ]
     var tokenizer: Tokenizer = Tokenizer() {
         didSet{
             editedRange = NSMakeRange(0, textStorage.string.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))
@@ -69,14 +50,14 @@ let __TokenKey = "OKToken"
 
             layoutManagers.forEach { layoutManager in
                 layoutManager.delegate = self
-                layoutManager.removeTemporaryAttribute(__TokenKey, forCharacterRange: inRange)
+//                layoutManager.removeTemporaryAttribute(__TokenKey, forCharacterRange: inRange)
             }
 
             tokens.forEach { token in
                 let tokenRange = NSMakeRange(inRange.location + token.originalStringIndex!, token.characters.characters.count)
 
                 if tokenRange.end < limit {
-                    layoutManagers.forEach { $0.addTemporaryAttribute(__TokenKey, value: token, forCharacterRange: tokenRange) }
+//                    layoutManagers.forEach { $0.addTemporaryAttribute(__TokenKey, value: token, forCharacterRange: tokenRange) }
                 }
             }
         }
@@ -94,9 +75,12 @@ let __TokenKey = "OKToken"
             return
         }
 
-        textDidChange()
-
-        let finalRange = (editedRange != nil) ? editedRange! : self.textStorage.editedRange
+        var finalRange: NSRange
+        if let editedRange = editedRange {
+            finalRange = editedRange
+        } else {
+            finalRange = textStorage.editedRange
+        }
         editedRange = nil
 
 
@@ -104,7 +88,7 @@ let __TokenKey = "OKToken"
         var actualRangeEnd = finalRange.end
         var parseLocation = 0
 
-        for character in (self.textStorage.string as String).characters {
+        for character in textStorage.string.characters {
             if character == "\n" {
                 if parseLocation < finalRange.location {
                     actualRangeStart = parseLocation
@@ -118,6 +102,9 @@ let __TokenKey = "OKToken"
         }
 
         let adaptiveRange = NSMakeRange(actualRangeStart, actualRangeEnd - actualRangeStart)
+        if adaptiveRange.end > textStorage.string.characters.count {
+            return
+        }
         let adaptiveString = (textStorage.string as NSString).substringWithRange(adaptiveRange)
 
         tokenizationOperation = NSBlockOperation() {
@@ -135,7 +122,7 @@ let __TokenKey = "OKToken"
         prepareToHighlight()
     }
 
-    override func textStorageDidProcessEditing(notification: NSNotification) {
+    func textStorageDidProcessEditing(notification: NSNotification) {
         if let editedRange = editedRange {
             self.editedRange = editedRange.unionWith(textStorage.editedRange)
         } else {
@@ -159,15 +146,32 @@ let __TokenKey = "OKToken"
     }
 }
 
+extension UIColor {
+    class func variableColor() -> UIColor{
+        return UIColor(red: 0, green: 0.4, blue: 0.4, alpha: 1.0)
+    }
+
+    class func commentColor() -> UIColor{
+        return UIColor(red: 0, green: 0.6, blue: 0, alpha: 1.0)
+    }
+
+    class func stringColor() -> UIColor{
+        return UIColor(red: 0.5, green: 0.4, blue: 0.2, alpha: 1.0)
+    }
+}
+
 extension NSRange{
     var end : Int {
+        if location == Int.max {
+            return location
+        }
         return length + location
     }
 
     func unionWith(range:NSRange)->NSRange{
         let newLocation = range.location < self.location ? range.location : self.location
         let newEnd = range.end > self.end ? range.end : self.end
-
+        
         return NSMakeRange(newLocation, newEnd-newLocation)
     }
 }
