@@ -57,10 +57,7 @@ public class Named : TokenizationState {
     override public func clone()->TokenizationState {
         //Create a "new" named state with the root set as a clone of our root
         let newState = Named(name:name,root: rootState.clone())
-        
-//        println(self.rootState.description)
-//        println(newState.rootState.description)
-        
+
         newState.endState = newState.rootState.lowLeaf()
         newState.cloneTimeEnd = endState
 
@@ -69,8 +66,6 @@ public class Named : TokenizationState {
     }
     
     public override func scan(operation: TokenizeOperation) {
-        operation.debug("Entered Named "+name)
-        
         rootState.scan(operation)
     }
 }
