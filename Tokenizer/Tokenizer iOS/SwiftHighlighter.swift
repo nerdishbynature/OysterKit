@@ -19,15 +19,6 @@ class SwiftHighlighter: NSObject, NSTextStorageDelegate, NSLayoutManagerDelegate
         }
     }
 
-    let tokenColorMap = [
-        "comment" : UIColor.commentColor(),
-        "keyword" : UIColor.purpleColor(),
-        "type" : UIColor.purpleColor(),
-        "string" : UIColor.redColor(),
-        "variable" : UIColor.variableColor(),
-        "integer": UIColor.purpleColor(),
-        "float": UIColor.purpleColor(),
-    ]
     var tokenizer: Tokenizer = Tokenizer() {
         didSet{
             editedRange = NSMakeRange(0, textStorage.string.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))
@@ -50,19 +41,39 @@ class SwiftHighlighter: NSObject, NSTextStorageDelegate, NSLayoutManagerDelegate
 
             layoutManagers.forEach { layoutManager in
                 layoutManager.delegate = self
-//                layoutManager.removeTemporaryAttribute(__TokenKey, forCharacterRange: inRange)
             }
 
             tokens.forEach { token in
                 let tokenRange = NSMakeRange(inRange.location + token.originalStringIndex!, token.characters.characters.count)
 
                 if tokenRange.end < limit {
-//                    layoutManagers.forEach { $0.addTemporaryAttribute(__TokenKey, value: token, forCharacterRange: tokenRange) }
+                    self.textStorage.addAttribute(NSForegroundColorAttributeName, value: self.colorForToken(token), range: tokenRange)
                 }
             }
         }
 
         NSOperationQueue.mainQueue().addOperations([applyColoring], waitUntilFinished: false)
+    }
+
+    func colorForToken(token: Token) -> UIColor {
+        switch token.name {
+        case "comment":
+            return UIColor.highlighting_commentColor()
+        case "keyword":
+            return UIColor.highlighting_keywordColor()
+        case "type":
+            return UIColor.highlighting_typeColor()
+        case "string":
+            return UIColor.highlighting_stringColor()
+        case "variable":
+            return UIColor.highlighting_variableColor()
+        case "integer", "float":
+            return UIColor.highlighting_numberColor()
+        case "import":
+            return UIColor.highlighting_importColor()
+        default:
+            return UIColor.whiteColor()
+        }
     }
 
     func tokenize(){
@@ -114,7 +125,7 @@ class SwiftHighlighter: NSObject, NSTextStorageDelegate, NSLayoutManagerDelegate
         backgroundQueue.addOperation(tokenizationOperation)
     }
 
-    func scheduleHighlighting(){
+    func scheduleHighlighting() {
         if tokenizationOperation.executing {
             return
         }
@@ -136,27 +147,52 @@ class SwiftHighlighter: NSObject, NSTextStorageDelegate, NSLayoutManagerDelegate
             return attrs
         }
 
-        guard let token = attrs[__TokenKey] as? Token, color = tokenColorMap[token.name] else {
+        guard let token = attrs[__TokenKey] as? Token else {
             return attrs
         }
 
         var returnAttributes = attrs
-        returnAttributes[NSForegroundColorAttributeName] = color
+        returnAttributes[NSForegroundColorAttributeName] = colorForToken(token)
         return returnAttributes
     }
 }
 
 extension UIColor {
-    class func variableColor() -> UIColor{
-        return UIColor(red: 0, green: 0.4, blue: 0.4, alpha: 1.0)
+    convenience private init(hex: UInt) {
+        self.init(
+            red: CGFloat((hex & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((hex & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(hex & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
     }
 
-    class func commentColor() -> UIColor{
-        return UIColor(red: 0, green: 0.6, blue: 0, alpha: 1.0)
+    static func highlighting_commentColor() -> UIColor {
+        return UIColor(hex: 0x41B645)
     }
 
-    class func stringColor() -> UIColor{
-        return UIColor(red: 0.5, green: 0.4, blue: 0.2, alpha: 1.0)
+    static func highlighting_keywordColor() -> UIColor {
+        return UIColor(hex: 0xB21889)
+    }
+
+    static func highlighting_typeColor() -> UIColor {
+        return UIColor(hex: 0x00A0BE)
+    }
+
+    static func highlighting_stringColor() -> UIColor {
+        return UIColor(hex: 0xDB2C38)
+    }
+
+    static func highlighting_variableColor() -> UIColor {
+        return UIColor(hex: 0x55747C)
+    }
+
+    static func highlighting_numberColor() -> UIColor {
+        return UIColor(hex: 0x786DC4)
+    }
+
+    static func highlighting_importColor() -> UIColor {
+        return UIColor(hex: 0xC67C48)
     }
 }
 

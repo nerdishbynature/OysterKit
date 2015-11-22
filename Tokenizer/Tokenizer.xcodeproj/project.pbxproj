@@ -7,17 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2370ACD21BD61FE8004D247D /* oystertest.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2370ACD01BD61FE8004D247D /* oystertest.txt */; settings = {ASSET_TAGS = (); }; };
-		2370ACD31BD61FE8004D247D /* Swift.oyster in Resources */ = {isa = PBXBuildFile; fileRef = 2370ACD11BD61FE8004D247D /* Swift.oyster */; settings = {ASSET_TAGS = (); }; };
+		231978251BD78BB20064F28A /* ObjectiveC.oyster in Resources */ = {isa = PBXBuildFile; fileRef = 231978241BD78BB20064F28A /* ObjectiveC.oyster */; };
+		231978271BD78BC70064F28A /* objectivecoystertest.txt in Resources */ = {isa = PBXBuildFile; fileRef = 231978261BD78BC70064F28A /* objectivecoystertest.txt */; };
+		231978291BD78EE10064F28A /* Ruby.oyster in Resources */ = {isa = PBXBuildFile; fileRef = 231978281BD78EE10064F28A /* Ruby.oyster */; };
+		2319782B1BD78FDC0064F28A /* rubytest.rb in Resources */ = {isa = PBXBuildFile; fileRef = 2319782A1BD78FDC0064F28A /* rubytest.rb */; };
+		2370ACD21BD61FE8004D247D /* oystertest.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2370ACD01BD61FE8004D247D /* oystertest.txt */; };
+		2370ACD31BD61FE8004D247D /* Swift.oyster in Resources */ = {isa = PBXBuildFile; fileRef = 2370ACD11BD61FE8004D247D /* Swift.oyster */; };
 		23C3768A1BD6304E00193CF8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C376891BD6304E00193CF8 /* AppDelegate.swift */; };
 		23C3768C1BD6304E00193CF8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3768B1BD6304E00193CF8 /* ViewController.swift */; };
 		23C3768F1BD6304E00193CF8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23C3768D1BD6304E00193CF8 /* Main.storyboard */; };
 		23C376911BD6304E00193CF8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23C376901BD6304E00193CF8 /* Assets.xcassets */; };
 		23C376941BD6304E00193CF8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23C376921BD6304E00193CF8 /* LaunchScreen.storyboard */; };
-		23C3769A1BD6305E00193CF8 /* OysterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23C376991BD6305E00193CF8 /* OysterKit.framework */; };
 		23C3769C1BD6313500193CF8 /* oystertest.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2370ACD01BD61FE8004D247D /* oystertest.txt */; };
 		23C3769D1BD6313500193CF8 /* Swift.oyster in Resources */ = {isa = PBXBuildFile; fileRef = 2370ACD11BD61FE8004D247D /* Swift.oyster */; };
-		23C3769F1BD6323500193CF8 /* SwiftHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3769E1BD6323500193CF8 /* SwiftHighlighter.swift */; settings = {ASSET_TAGS = (); }; };
+		23C3769F1BD6323500193CF8 /* SwiftHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3769E1BD6323500193CF8 /* SwiftHighlighter.swift */; };
+		23F310CD1C01BC1C001B8EEC /* OysterKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 23C376991BD6305E00193CF8 /* OysterKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		42146BED1966DD4E009BA88A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42146BEC1966DD4E009BA88A /* main.swift */; };
 		42146BEF1966DD4E009BA88A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42146BEE1966DD4E009BA88A /* AppDelegate.swift */; };
 		42146BF11966DD4E009BA88A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42146BF01966DD4E009BA88A /* Images.xcassets */; };
@@ -50,7 +54,25 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		23F310CE1C01BC1C001B8EEC /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				23F310CD1C01BC1C001B8EEC /* OysterKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		231978241BD78BB20064F28A /* ObjectiveC.oyster */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ObjectiveC.oyster; sourceTree = "<group>"; };
+		231978261BD78BC70064F28A /* objectivecoystertest.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = objectivecoystertest.txt; sourceTree = "<group>"; };
+		231978281BD78EE10064F28A /* Ruby.oyster */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Ruby.oyster; sourceTree = "<group>"; };
+		2319782A1BD78FDC0064F28A /* rubytest.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = rubytest.rb; sourceTree = "<group>"; };
 		2370ACD01BD61FE8004D247D /* oystertest.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = oystertest.txt; sourceTree = "<group>"; };
 		2370ACD11BD61FE8004D247D /* Swift.oyster */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Swift.oyster; sourceTree = "<group>"; };
 		23C376871BD6304E00193CF8 /* Tokenizer iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tokenizer iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,7 +101,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				23C3769A1BD6305E00193CF8 /* OysterKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,11 +161,15 @@
 			children = (
 				2370ACD01BD61FE8004D247D /* oystertest.txt */,
 				2370ACD11BD61FE8004D247D /* Swift.oyster */,
+				231978241BD78BB20064F28A /* ObjectiveC.oyster */,
+				231978281BD78EE10064F28A /* Ruby.oyster */,
 				42146BEE1966DD4E009BA88A /* AppDelegate.swift */,
 				422D5E6A197CFF1900678526 /* TokenHighlighter.swift */,
 				42146BF01966DD4E009BA88A /* Images.xcassets */,
 				42146BF21966DD4E009BA88A /* MainMenu.xib */,
 				42146BEA1966DD4E009BA88A /* Supporting Files */,
+				231978261BD78BC70064F28A /* objectivecoystertest.txt */,
+				2319782A1BD78FDC0064F28A /* rubytest.rb */,
 			);
 			path = Tokenizer;
 			sourceTree = "<group>";
@@ -185,6 +210,7 @@
 				23C376831BD6304E00193CF8 /* Sources */,
 				23C376841BD6304E00193CF8 /* Frameworks */,
 				23C376851BD6304E00193CF8 /* Resources */,
+				23F310CE1C01BC1C001B8EEC /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -293,8 +319,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				42146BF11966DD4E009BA88A /* Images.xcassets in Resources */,
+				231978291BD78EE10064F28A /* Ruby.oyster in Resources */,
 				2370ACD31BD61FE8004D247D /* Swift.oyster in Resources */,
+				231978251BD78BB20064F28A /* ObjectiveC.oyster in Resources */,
+				2319782B1BD78FDC0064F28A /* rubytest.rb in Resources */,
 				2370ACD21BD61FE8004D247D /* oystertest.txt in Resources */,
+				231978271BD78BC70064F28A /* objectivecoystertest.txt in Resources */,
 				42146BF41966DD4E009BA88A /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -566,6 +596,7 @@
 				23C376971BD6304E00193CF8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		42146BE21966DD4E009BA88A /* Build configuration list for PBXProject "Tokenizer" */ = {
 			isa = XCConfigurationList;

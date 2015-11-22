@@ -59,8 +59,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextStorageDelegate {
     }
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
-        let swiftOyster = NSBundle.mainBundle().URLForResource("Swift", withExtension: "oyster")!
-        let swiftOysterTestFile = NSBundle.mainBundle().URLForResource("oystertest", withExtension: "txt")!
+        let swiftOyster = NSBundle.mainBundle().URLForResource("Ruby", withExtension: "oyster")!
+        let swiftOysterTestFile = NSBundle.mainBundle().URLForResource("rubytest", withExtension: "rb")!
         tokenizerDefinitionTextView.string = try! String(contentsOfURL: swiftOyster, encoding: NSUTF8StringEncoding)
         testInputTextView.string = try! String(contentsOfURL: swiftOysterTestFile, encoding: NSUTF8StringEncoding)
 

@@ -1,0 +1,22 @@
+@letters = *"-_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+@integer = *"0123456789"
+@comment = ["//"]
+begin{
+    @comment.!*"\n"->comment
+["class","self","#import","super","init","enum","protocol","break","case","continue","else","if","for","in","return","@import","swift","while","do","__COLUMN__","__FILE__","__FUNCTION__","__LINE__","nonatomic","auto","else","long","switch","auto","else","long","switch","break","enum","register","typedef","case","extern","return","union","char","float","short","unsigned","const","for","signed","void","continue","goto","sizeof","volatile","default","if","static","while","do","int","struct","_Packed","double","protocol","interface","implementation","property","nonatomic","retain","strong","weak","unsafe_unretained","readwrite","readonly","nonnull","nullable","YES","NO","-"].{
+        @letters->variable
+        ^->keyword
+    }
+    ["NSObject","NSInteger","NSNumber","CGFloat"].{
+        @letters->variable
+        ^->type
+    }
+    <'"',{!"\""->string}>->string
+        @letters->variable
+    @integer.{
+        ".".@integer->float
+        ^->integer
+    }
+
+    !"\x04"
+}

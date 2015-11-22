@@ -1,0 +1,23 @@
+@letters = *"-_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+@integer = *"0123456789"
+@comment = ["#"]
+begin{
+@comment.!*"\n"->comment
+    ["BEGIN","END","alias","and","begin","break","case","class","def","defined","do","else","elsif","end","ensure","false","for","if","module","next","nil","not","or","redo","rescue","retry","return","self","super","then","true","undef","unless","until","when","while","yield","__FILE__","__LINE__","require"].{
+        @letters->variable
+        ^->keyword
+    }
+    ["Bool","Int","float"].{
+        @letters->variable
+        ^->type
+    }
+    <'"',{!"\""->string}>->string
+    <'\'',{!"\'"->string}>->string
+    @letters->variable
+    @integer.{
+        ".".@integer->float
+        ^->integer
+    }
+
+    !"\x04"
+}

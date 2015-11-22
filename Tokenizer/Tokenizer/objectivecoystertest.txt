@@ -1,0 +1,45 @@
+// Test
+//
+
+#import "FileLayoutManager.h"
+#import "UIFont+Additions.h"
+#import "Git2Go-Swift.h"
+
+@interface FileLayoutManager () <NSLayoutManagerDelegate>
+
+@end
+
+@implementation FileLayoutManager
+
+- (instancetype)init {
+self = [super init];
+if (self) {
+self.delegate = self;
+}
+
+return self;
+}
+
+- (UIEdgeInsets)paragraphNumberInsets {
+return UIEdgeInsetsMake(0, 5, 0, 0);
+}
+
+- (void)setLineFragmentRect:(CGRect)fragmentRect forGlyphRange:(NSRange)glyphRange usedRect:(CGRect)usedRect {
+UIEdgeInsets insets = [self paragraphNumberInsets];
+
+fragmentRect.origin.x += insets.left;
+usedRect.origin.x += insets.left;
+
+[super setLineFragmentRect:fragmentRect forGlyphRange:glyphRange usedRect:usedRect];
+}
+
+- (void)setExtraLineFragmentRect:(CGRect)fragmentRect usedRect:(CGRect)usedRect textContainer:(NSTextContainer *)container {
+UIEdgeInsets insets = [self paragraphNumberInsets];
+
+fragmentRect.origin.x += insets.left;
+usedRect.origin.x += insets.left;
+
+[super setExtraLineFragmentRect:fragmentRect usedRect:usedRect textContainer:container];
+}
+
+@end
