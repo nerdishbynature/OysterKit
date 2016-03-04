@@ -3,5 +3,5 @@ language: objective-c
 before_install:
     - ./scripts/test bootstrap
 script:
-    - ./scripts/test test
     - "carthage build --no-skip-current"
+    - ./scripts/test test
