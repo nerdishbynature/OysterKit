@@ -69,8 +69,6 @@
 		23E966311BD4C3E7007ED3D6 /* stateTestRepeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965EC1BD4C37F007ED3D6 /* stateTestRepeat.swift */; };
 		23E966321BD4C3E7007ED3D6 /* TestingSupportFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965ED1BD4C37F007ED3D6 /* TestingSupportFunctions.swift */; };
 		23E966331BD4C3E7007ED3D6 /* tokenizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965EE1BD4C37F007ED3D6 /* tokenizerTests.swift */; };
-		23E966351BD4C4BF007ED3D6 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 23E966341BD4C4BF007ED3D6 /* Info.plist */; };
-		23E966361BD4C4BF007ED3D6 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 23E966341BD4C4BF007ED3D6 /* Info.plist */; };
 		23E966381BD4C510007ED3D6 /* referenceOKScriptDefinition.txt in Resources */ = {isa = PBXBuildFile; fileRef = 23E966371BD4C510007ED3D6 /* referenceOKScriptDefinition.txt */; };
 		23E966391BD4C510007ED3D6 /* referenceOKScriptDefinition.txt in Resources */ = {isa = PBXBuildFile; fileRef = 23E966371BD4C510007ED3D6 /* referenceOKScriptDefinition.txt */; };
 /* End PBXBuildFile section */
@@ -358,7 +356,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "rwe-uk";
 				TargetAttributes = {
 					23E965A01BD4C2CF007ED3D6 = {
@@ -410,7 +408,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				23E966381BD4C510007ED3D6 /* referenceOKScriptDefinition.txt in Resources */,
-				23E966351BD4C4BF007ED3D6 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,7 +423,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				23E966391BD4C510007ED3D6 /* referenceOKScriptDefinition.txt in Resources */,
-				23E966361BD4C4BF007ED3D6 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -548,8 +544,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -579,6 +577,7 @@
 				PRODUCT_NAME = OysterKit;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -598,8 +597,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -621,6 +622,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rwe-uk.OysterKit";
 				PRODUCT_NAME = OysterKit;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -632,6 +635,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -642,7 +646,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rwe-uk.OysterKit";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -650,6 +653,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -659,7 +663,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rwe-uk.OysterKit";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
